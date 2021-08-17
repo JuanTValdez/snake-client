@@ -1,4 +1,5 @@
 const net = require("net");
+
 const name = "Name: JTV";
 
 const connect = function () {
@@ -15,10 +16,11 @@ const connect = function () {
 
   conn.on("connect", () => {
     console.log("Succesfully connected to game server");
-  });
-
-  conn.on("connect", () => {
-    conn.write("Name:" + name);
+    conn.write(name);
+    // conn.write("Move: up");
+    // conn.write("Move: down");
+    // conn.write("Move: left");
+    // conn.write("Move: right");
   });
 
   return conn;
