@@ -1,5 +1,5 @@
-const { builtinModules } = require("module");
 const net = require("net");
+const name = "Name: JTV";
 
 const connect = function () {
   const conn = net.createConnection({
@@ -11,6 +11,14 @@ const connect = function () {
 
   conn.on("data", (data) => {
     console.log("Server says: ", data);
+  });
+
+  conn.on("connect", () => {
+    console.log("Succesfully connected to game server");
+  });
+
+  conn.on("connect", () => {
+    conn.write("Name:" + name);
   });
 
   return conn;

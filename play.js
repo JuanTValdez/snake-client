@@ -1,5 +1,6 @@
-// const net = require("net");
-const { connect } = require("./client");
+const net = require("net");
+const connect = require("./client");
+
 /**
  * Establishes connection with the game server
  */
