@@ -14,13 +14,19 @@ const connect = function () {
     console.log("Server says: ", data);
   });
 
+  // conn.on("data", (data) => {
+  // conn.write("Move: up", data);
+  // conn.write("Move: down", data);
+  // conn.write("Move: left", data);
+  // conn.write("Move: right", data);
+  // });
   conn.on("connect", () => {
     console.log("Succesfully connected to game server");
     conn.write(name);
-    // conn.write("Move: up");
-    // conn.write("Move: down");
-    // conn.write("Move: left");
-    // conn.write("Move: right");
+
+    setInterval(() => {
+      conn.write("Move: up");
+    }, 500);
   });
 
   return conn;
