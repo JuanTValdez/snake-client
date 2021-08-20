@@ -1,5 +1,9 @@
-let connection;
+const { moveUp, moveDown, moveRight, moveLeft } = require("./constants");
+
+// Message sent to players upon moving.
 const saySomething = "Say: I am moving ";
+let connection;
+
 const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -7,74 +11,46 @@ const setupInput = function (conn) {
   stdin.setEncoding("utf8");
   stdin.resume();
 
-  // conn.on("connect", (data) => {
   stdin.on("data", (key) => {
     handleUserInput(key);
   });
-  // });
 
-  // stdin.on("data", (key) => {
-  //   handleUserInput(key);
-  // });
   return stdin;
 };
 
+/*         INPUT COMMANDS        */
+/*   Sends input to the server   */
+
 const handleUserInput = (key) => {
-  // // W
+  // W
   if (key === `\u0077`) {
-    // console.log("W has been pressed");
     connection.write(saySomething + "up");
-    return connection.write("Move: up");
+    return connection.write(moveUp);
   }
 
   // A
   if (key === `\u0061`) {
-    // console.log("A has been pressed!");
     connection.write(saySomething + "left");
-    return connection.write("Move: left");
+    return connection.write(moveLeft);
   }
 
   //  S
   if (key === `\u0073`) {
-    // console.log("S has been pressed!");
     connection.write(saySomething + "down");
-    return connection.write("Move: down");
+    return connection.write(moveDown);
   }
 
   // D
   if (key === `\u0064`) {
-    // console.log("D has been pressed!");
     connection.write(saySomething + "right");
-    return connection.write("Move: right");
+    return connection.write(moveRight);
   }
   // ctrl + c
   if (key === `\u0003`) {
-    console.log("ctrl + c has been pressed");
     process.exit();
   }
+
+  /*     END INPUT COMMANDS     */
 };
 
 module.exports = { setupInput };
-
-// const handleUserInput = function (key) {
-//   const stdin = process.stdin;
-
-//   stdin.on("data", (key) => {
-//     if (key === "\u0003") {
-//       process.exit();
-//     }
-//   });
-// };
-
-// const setupInput = function (conn) {
-//   connection = conn;
-
-//   const stdin = process.stdin;
-//   stdin.setRawMode(true);
-//   stdin.setEncoding("utf8");
-//   stdin.resume();
-//   // stdin.on("data", (key) => {
-//   //   handleUserInput(key);
-//   // });
-//   return stdin;
-// };

@@ -1,30 +1,24 @@
 const net = require("net");
-
+const { IP, PORT } = require("./constants");
 const name = "Name: JTV";
 
 const connect = function () {
   const conn = net.createConnection({
-    host: "localhost",
-    port: 50541,
+    host: IP,
+    port: PORT,
   });
-  // interpret incoming data as text
+
   conn.setEncoding("utf8");
 
   conn.on("data", (data) => {
     console.log("Server says: ", data);
   });
 
-  // conn.on("data", (data) => {
-  // conn.write("Move: up", data);
-
-  // });
   conn.on("connect", (data) => {
     console.log("Succesfully connected to game server");
-    conn.write(name);
 
-    // setInterval(() => {
-    //   conn.write("Move: up", data);
-    // }, 500);
+    // Displays name to on server
+    conn.write(name);
   });
 
   return conn;
