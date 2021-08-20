@@ -1,5 +1,5 @@
 let connection;
-
+const saySomething = "Say: I am moving ";
 const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -22,26 +22,30 @@ const setupInput = function (conn) {
 const handleUserInput = (key) => {
   // // W
   if (key === `\u0077`) {
-    console.log("W has been pressed");
+    // console.log("W has been pressed");
+    connection.write(saySomething + "up");
     return connection.write("Move: up");
   }
 
   // A
   if (key === `\u0061`) {
-    console.log("A has been pressed!");
+    // console.log("A has been pressed!");
+    connection.write(saySomething + "left");
     return connection.write("Move: left");
   }
 
   //  S
-  if (key === `\u0064`) {
-    console.log("S has been pressed!");
-    return connection.write("Move: right");
+  if (key === `\u0073`) {
+    // console.log("S has been pressed!");
+    connection.write(saySomething + "down");
+    return connection.write("Move: down");
   }
 
   // D
-  if (key === `\u0073`) {
-    console.log("D has been pressed!");
-    return connection.write("Move: down");
+  if (key === `\u0064`) {
+    // console.log("D has been pressed!");
+    connection.write(saySomething + "right");
+    return connection.write("Move: right");
   }
   // ctrl + c
   if (key === `\u0003`) {
