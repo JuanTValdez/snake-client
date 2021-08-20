@@ -20,16 +20,16 @@ const connect = function () {
   // conn.write("Move: left", data);
   // conn.write("Move: right", data);
   // });
-  conn.on("connect", () => {
+  conn.on("connect", (data) => {
     console.log("Succesfully connected to game server");
     conn.write(name);
 
     setInterval(() => {
-      conn.write("Move: up");
+      conn.write("Move: up", data);
     }, 500);
   });
 
   return conn;
 };
 
-module.exports = connect;
+module.exports = { connect };
